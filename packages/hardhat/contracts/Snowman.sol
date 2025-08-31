@@ -106,14 +106,6 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
         return this.onERC721Received.selector;
     }
 
-    function withdrawFees() external override {
-        if (address(this).balance == 0) revert Errors.Snowman__NoFeesAvailable();
-
-        (bool success, ) = s_feeCollector.call{ value: address(this).balance }("");
-
-        if (!success) revert Errors.Snowman__WithdrawalFailed();
-    }
-
     function tokenURI(uint256 tokenId) public view override(ERC721, ISnowman) returns (string memory) {
         if (!_exists(tokenId)) revert Errors.Snowman__NotMinted();
 

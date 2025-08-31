@@ -18,12 +18,15 @@ error Scarf__TransferFailed();
 error Scarf__ZeroAddress();
 error Scarf__InvalidFeeCollector();
 error Scarf__NotOwner();
+error Scarf__NotFeeCollector();
+error Scarf__NoFeesAvailable();
 
 contract Scarf is ERC721Enumerable, Ownable {
     using TypeCast for bytes;
     using Counters for Counters.Counter;
 
     event FeeCollectorChanged(address oldFeeCollector, address newFeeCollector);
+    event FeesWithdrawn(address feeCollector, uint256 amount);
 
     uint256 constant MINT_FEE = 0.001 ether;
     address s_feeCollector;
@@ -83,5 +86,16 @@ contract Scarf is ERC721Enumerable, Ownable {
 
     function getAttributes(uint256 tokenId) public view returns (DataTypes.Scarf memory) {
         return s_attributes[tokenId];
+    }
+
+    function withdrawFees() external {
+        if (msg.sender != s_feeCollector) revert Scarf__NotFeeCollector();
+        if (address(this).balance == 0) revert Scarf__NoFeesAvailable();
+
+        uint256 amount = address(this).balance;
+        (bool success, ) = payable(s_feeCollector).call{ value: amount }("");
+        if (!success) revert Scarf__TransferFailed();
+
+        emit FeesWithdrawn(s_feeCollector, amount);
     }
 }

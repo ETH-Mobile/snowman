@@ -18,12 +18,15 @@ error Hat__TransferFailed();
 error Hat__ZeroAddress();
 error Hat__InvalidFeeCollector();
 error Hat__NotOwner();
+error Hat__NotFeeCollector();
+error Hat__NoFeesAvailable();
 
 contract Hat is ERC721Enumerable, Ownable {
     using TypeCast for bytes;
     using Counters for Counters.Counter;
 
     event FeeCollectorChanged(address oldFeeCollector, address newFeeCollector);
+    event FeesWithdrawn(address feeCollector, uint256 amount);
 
     uint256 constant MINT_FEE = 0.001 ether;
     address s_feeCollector;
@@ -79,5 +82,16 @@ contract Hat is ERC721Enumerable, Ownable {
 
     function getAttributes(uint256 tokenId) public view returns (DataTypes.Hat memory) {
         return s_attributes[tokenId];
+    }
+
+    function withdrawFees() external {
+        if (msg.sender != s_feeCollector) revert Hat__NotFeeCollector();
+        if (address(this).balance == 0) revert Hat__NoFeesAvailable();
+
+        uint256 amount = address(this).balance;
+        (bool success, ) = payable(s_feeCollector).call{ value: amount }("");
+        if (!success) revert Hat__TransferFailed();
+
+        emit FeesWithdrawn(s_feeCollector, amount);
     }
 }

@@ -3,11 +3,7 @@
 pragma solidity ^0.8.18;
 
 interface Errors {
-    error Snowman__InvalidMintFee();
-    error Snowman__NoFeesAvailable();
     error Snowman__NotMinted();
-    error Snowman__NotEnoughEth();
-    error Snowman__WithdrawalFailed();
     error Snowman__ZeroAddress();
     error Snowman__InvalidFeeCollector();
     error Snowman__CannotWearAccessory();

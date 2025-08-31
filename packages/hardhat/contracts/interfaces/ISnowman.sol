@@ -42,13 +42,6 @@ interface ISnowman is IERC721Enumerable {
 
     /**
      *
-     * @notice Emitted when fees are withdrawn
-     * @param amount Amount of fees withdrawn
-     */
-    event FeesWithdrawn(uint256 amount);
-
-    /**
-     *
      * @notice Mints one snowman with dynamic attributes
      */
     function mint() external returns (uint256);
@@ -78,12 +71,6 @@ interface ISnowman is IERC721Enumerable {
      * @param snowmanId Id of snowman to remove all accessories from
      */
     function removeAllAccessories(uint256 snowmanId) external;
-
-    /**
-     * @notice Withdraws mint fees to fee collector's account
-     * @dev Anyone can call this function
-     */
-    function withdrawFees() external;
 
     /**
      *

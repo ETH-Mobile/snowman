@@ -266,25 +266,83 @@ describe('Snowman☃️', () => {
     });
   });
 
-  describe('withdrawFees()', () => {
-    it('transfers fees to fee collector', async () => {
-      await snowman.mint();
+  describe('Accessory Contracts', () => {
+    describe('Belt', () => {
+      it('mints belt for free', async () => {
+        const oldBalance = await belt.balanceOf(valentine.address);
+        await belt.mint({ value: ACCESSORY_MINT_FEE });
+        const newBalance = await belt.balanceOf(valentine.address);
+        expect(newBalance).to.equal(oldBalance + BigInt(1));
+      });
 
-      const feeCollector: string = await snowman.getFeeCollector();
-      const oldFeeCollectorBalance: bigint =
-        await ethers.provider.getBalance(feeCollector);
+      it('withdrawFees() - only fee collector can withdraw', async () => {
+        // Try to withdraw as non-fee collector
+        await expect(belt.withdrawFees()).to.be.revertedWithCustomError(
+          belt,
+          'Belt__NotFeeCollector'
+        );
+      });
 
-      await snowman.withdrawFees();
+      it('withdrawFees() - reverts if no fees available', async () => {
+        const feeCollector = await belt.getFeeCollector();
+        const feeCollectorSigner = await ethers.getSigner(feeCollector);
 
-      const newFeeCollectorBalance: bigint =
-        await ethers.provider.getBalance(feeCollector);
-      expect(newFeeCollectorBalance).to.equal(oldFeeCollectorBalance);
+        await expect(
+          belt.connect(feeCollectorSigner).withdrawFees()
+        ).to.be.revertedWithCustomError(belt, 'Belt__NoFeesAvailable');
+      });
     });
-    it('prevents redundant withdraws', async () => {
-      await expect(snowman.withdrawFees()).to.be.revertedWithCustomError(
-        snowman,
-        'Snowman__NoFeesAvailable'
-      );
+
+    describe('Hat', () => {
+      it('mints hat for free', async () => {
+        const oldBalance = await hat.balanceOf(valentine.address);
+        await hat.mint({ value: ACCESSORY_MINT_FEE });
+        const newBalance = await hat.balanceOf(valentine.address);
+        expect(newBalance).to.equal(oldBalance + BigInt(1));
+      });
+
+      it('withdrawFees() - only fee collector can withdraw', async () => {
+        // Try to withdraw as non-fee collector
+        await expect(hat.withdrawFees()).to.be.revertedWithCustomError(
+          hat,
+          'Hat__NotFeeCollector'
+        );
+      });
+
+      it('withdrawFees() - reverts if no fees available', async () => {
+        const feeCollector = await hat.getFeeCollector();
+        const feeCollectorSigner = await ethers.getSigner(feeCollector);
+
+        await expect(
+          hat.connect(feeCollectorSigner).withdrawFees()
+        ).to.be.revertedWithCustomError(hat, 'Hat__NoFeesAvailable');
+      });
+    });
+
+    describe('Scarf', () => {
+      it('mints scarf for free', async () => {
+        const oldBalance = await scarf.balanceOf(valentine.address);
+        await scarf.mint({ value: ACCESSORY_MINT_FEE });
+        const newBalance = await scarf.balanceOf(valentine.address);
+        expect(newBalance).to.equal(oldBalance + BigInt(1));
+      });
+
+      it('withdrawFees() - only fee collector can withdraw', async () => {
+        // Try to withdraw as non-fee collector
+        await expect(scarf.withdrawFees()).to.be.revertedWithCustomError(
+          scarf,
+          'Scarf__NotFeeCollector'
+        );
+      });
+
+      it('withdrawFees() - reverts if no fees available', async () => {
+        const feeCollector = await scarf.getFeeCollector();
+        const feeCollectorSigner = await ethers.getSigner(feeCollector);
+
+        await expect(
+          scarf.connect(feeCollectorSigner).withdrawFees()
+        ).to.be.revertedWithCustomError(scarf, 'Scarf__NoFeesAvailable');
+      });
     });
   });
 });
