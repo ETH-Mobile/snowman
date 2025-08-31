@@ -35,7 +35,6 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
 
     event FeeCollectorChanged(address oldFeeCollector, address newFeeCollector);
 
-    uint256 constant MINT_FEE = 0.02 ether;
     address payable s_feeCollector;
     Counters.Counter private s_tokenIds;
 
@@ -50,9 +49,7 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
         s_feeCollector = payable(feeCollector);
     }
 
-    function mint() public payable returns (uint256) {
-        if (msg.value != MINT_FEE) revert Errors.Snowman__InvalidMintFee();
-
+    function mint() public returns (uint256) {
         s_tokenIds.increment();
 
         uint256 tokenId = s_tokenIds.current();

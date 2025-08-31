@@ -25,7 +25,7 @@ contract Belt is ERC721Enumerable, Ownable {
 
     event FeeCollectorChanged(address oldFeeCollector, address newFeeCollector);
 
-    uint256 constant MINT_FEE = 0.01 ether;
+    uint256 constant MINT_FEE = 0.001 ether;
     address s_feeCollector;
     Counters.Counter private s_tokenIds;
 

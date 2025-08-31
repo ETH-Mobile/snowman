@@ -49,9 +49,9 @@ interface ISnowman is IERC721Enumerable {
 
     /**
      *
-     * @notice Mints one snowman with dynamic attributes for 0.02 ETH
+     * @notice Mints one snowman with dynamic attributes
      */
-    function mint() external payable returns (uint256);
+    function mint() external returns (uint256);
 
     /**
      *

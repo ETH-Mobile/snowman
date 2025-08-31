@@ -24,7 +24,6 @@ import {
   View
 } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
-import { parseEther } from 'viem';
 
 export default function Home() {
   const toast = useToast();
@@ -52,8 +51,7 @@ export default function Home() {
     try {
       setIsMinting(true);
       await writeContractAsync({
-        functionName: 'mint',
-        value: parseEther('0.02')
+        functionName: 'mint'
       });
 
       setBalance(balance + 1);
@@ -178,7 +176,7 @@ export default function Home() {
 
           <Text className="text-center mt-4 font-[Poppins] text-base max-w-[70%]">
             Mint a unique Snowman☃️ for{' '}
-            <Text style={{ color: COLORS.primary }}>0.02 ETH</Text>
+            <Text style={{ color: COLORS.primary }}>FREE</Text>
           </Text>
 
           <View className="flex-row justify-between w-full gap-2.5 mt-2.5">

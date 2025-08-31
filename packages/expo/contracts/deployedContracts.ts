@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from '../src/utils/eth-mobile/contract';
 const deployedContracts = {
   31337: {
     AccessoryManager: {
-      address: '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
+      address: '0x9A676e781A523b5d0C0e43731313A708CB607508',
       abi: [
         {
           inputs: [],
@@ -126,7 +126,7 @@ const deployedContracts = {
       inheritedFunctions: {}
     },
     Belt: {
-      address: '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e',
+      address: '0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE',
       abi: [
         {
           inputs: [
@@ -821,7 +821,7 @@ const deployedContracts = {
       inheritedFunctions: {}
     },
     Hat: {
-      address: '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318',
+      address: '0x0B306BF915C4d645ff596e518fAf3F9669b97016',
       abi: [
         {
           inputs: [
@@ -1516,7 +1516,7 @@ const deployedContracts = {
       inheritedFunctions: {}
     },
     Scarf: {
-      address: '0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
+      address: '0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1',
       abi: [
         {
           inputs: [
@@ -2211,7 +2211,7 @@ const deployedContracts = {
       inheritedFunctions: {}
     },
     Snowman: {
-      address: '0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0',
+      address: '0x68B1D87F95878fE05B998F19b66F4baba5De1aed',
       abi: [
         {
           inputs: [
@@ -2792,7 +2792,7 @@ const deployedContracts = {
               type: 'uint256'
             }
           ],
-          stateMutability: 'payable',
+          stateMutability: 'nonpayable',
           type: 'function'
         },
         {

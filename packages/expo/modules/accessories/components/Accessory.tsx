@@ -47,7 +47,7 @@ export default function Accessory({ name }: Props) {
     try {
       await writeContractAsync({
         functionName: 'mint',
-        value: ethers.parseEther('0.01')
+        value: ethers.parseEther('0.001')
       });
 
       toast.show(`Minted One Accessory`, {

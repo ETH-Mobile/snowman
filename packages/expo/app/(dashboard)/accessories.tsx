@@ -21,7 +21,8 @@ export default function Accessories() {
           </Text>
           <Text className="font-[Poppins-Medium] text-xl ml-4">Snowman☃️</Text>
           <Text className="text-center mt-4 font-[Poppins] text-base max-w-[70%]">
-            Mint one for <Text style={{ color: COLORS.primary }}>0.01 ETH</Text>
+            Mint one for{' '}
+            <Text style={{ color: COLORS.primary }}>0.001 ETH</Text>
           </Text>
         </View>
 

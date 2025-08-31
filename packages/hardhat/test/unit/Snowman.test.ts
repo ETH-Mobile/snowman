@@ -4,8 +4,7 @@ import { Belt, Hat, Scarf, Snowman } from '../../typechain-types';
 import { Addressable } from 'ethers';
 
 describe('Snowman☃️', () => {
-  const SNOWMAN_MINT_FEE: bigint = ethers.parseEther('0.02');
-  const ACCESSORY_MINT_FEE: bigint = ethers.parseEther('0.01');
+  const ACCESSORY_MINT_FEE: bigint = ethers.parseEther('0.001');
 
   const abiCoder = ethers.AbiCoder.defaultAbiCoder();
 
@@ -34,14 +33,14 @@ describe('Snowman☃️', () => {
   });
 
   describe('mint()', () => {
-    it('mints one(1) Snowman☃️ with unique attributes for 0.02 ETH💎', async () => {
+    it('mints one(1) Snowman☃️ with unique attributes for free', async () => {
       // Mint Snowman
       const oldTokenBalance: bigint = await snowman.balanceOf(
         valentine.address
       );
 
       console.log('Minting One(1) Snowman☃️...');
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
 
       const newTokenBalance: bigint = await snowman.balanceOf(
         valentine.address
@@ -50,15 +49,7 @@ describe('Snowman☃️', () => {
       console.log(`Mint successful✅`);
     });
     it('emits an event', async () => {
-      await expect(snowman.mint({ value: SNOWMAN_MINT_FEE })).to.emit(
-        snowman,
-        'Transfer'
-      );
-    });
-    it('reverts if mint fee is not enough', async () => {
-      await expect(
-        snowman.mint({ value: ethers.parseEther('0.01') })
-      ).to.be.revertedWithCustomError(snowman, 'Snowman__InvalidMintFee');
+      await expect(snowman.mint()).to.emit(snowman, 'Transfer');
     });
   });
 
@@ -132,7 +123,7 @@ describe('Snowman☃️', () => {
 
   describe('removeAccessory()', () => {
     beforeEach(async () => {
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
       await hat.mint({ value: ACCESSORY_MINT_FEE });
 
       await snowman.connect(owner).addAccessory(hat.target, 1);
@@ -181,7 +172,7 @@ describe('Snowman☃️', () => {
   describe('removeAllAccessories()', () => {
     beforeEach(async () => {
       // Add hat and scarf accessories
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
       await hat.mint({ value: ACCESSORY_MINT_FEE });
       await scarf.mint({ value: ACCESSORY_MINT_FEE });
 
@@ -223,7 +214,7 @@ describe('Snowman☃️', () => {
 
   describe('onERC721Received', () => {
     it("adds accessory to user's snowman", async () => {
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
       await hat.mint({ value: ACCESSORY_MINT_FEE });
 
       await snowman.connect(owner).addAccessory(hat.target, 1);
@@ -240,8 +231,8 @@ describe('Snowman☃️', () => {
       expect(await snowman.getAccessoryById(hat.target, 1)).to.equal(1);
     });
     it('reverts if caller is not snowman owner', async () => {
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
-      await snowman.connect(owner).mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
+      await snowman.connect(owner).mint();
       await hat.mint({ value: ACCESSORY_MINT_FEE });
 
       await snowman.connect(owner).addAccessory(hat.target, 1);
@@ -259,7 +250,7 @@ describe('Snowman☃️', () => {
     });
 
     it('reverts if snowman cannot wear the accessory', async () => {
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
       await hat.mint({ value: ACCESSORY_MINT_FEE });
 
       // Add accessory to snowman
@@ -277,7 +268,7 @@ describe('Snowman☃️', () => {
 
   describe('withdrawFees()', () => {
     it('transfers fees to fee collector', async () => {
-      await snowman.mint({ value: SNOWMAN_MINT_FEE });
+      await snowman.mint();
 
       const feeCollector: string = await snowman.getFeeCollector();
       const oldFeeCollectorBalance: bigint =
@@ -287,9 +278,7 @@ describe('Snowman☃️', () => {
 
       const newFeeCollectorBalance: bigint =
         await ethers.provider.getBalance(feeCollector);
-      expect(newFeeCollectorBalance).to.equal(
-        oldFeeCollectorBalance + BigInt(SNOWMAN_MINT_FEE)
-      );
+      expect(newFeeCollectorBalance).to.equal(oldFeeCollectorBalance);
     });
     it('prevents redundant withdraws', async () => {
       await expect(snowman.withdrawFees()).to.be.revertedWithCustomError(
