@@ -33,9 +33,6 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
     using TypeCast for bytes;
     using Counters for Counters.Counter;
 
-    event FeeCollectorChanged(address oldFeeCollector, address newFeeCollector);
-
-    address payable s_feeCollector;
     Counters.Counter private s_tokenIds;
 
     mapping(uint256 snowmanId => DataTypes.Snowman snowman) private s_attributes;
@@ -45,9 +42,7 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
 
     mapping(address accessory => mapping(uint256 snowmanId => uint256 accessoryId)) private s_accessoriesById;
 
-    constructor(address feeCollector) ERC721("Snowman", "Snowman") {
-        s_feeCollector = payable(feeCollector);
-    }
+    constructor() ERC721("Snowman", "Snowman") {}
 
     function mint() public returns (uint256) {
         s_tokenIds.increment();
@@ -58,16 +53,6 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
         AttributesGen.generateAttributes(s_attributes, tokenId);
 
         return tokenId;
-    }
-
-    function setFeeCollector(address newFeeCollector) public onlyOwner {
-        address oldFeeCollector = s_feeCollector;
-        if (newFeeCollector == address(0)) revert Errors.Snowman__ZeroAddress();
-        if (newFeeCollector == oldFeeCollector) revert Errors.Snowman__InvalidFeeCollector();
-
-        s_feeCollector = payable(newFeeCollector);
-
-        emit FeeCollectorChanged(oldFeeCollector, newFeeCollector);
     }
 
     function addAccessory(address accessory, DataTypes.AccessoryPosition position) public onlyOwner {
@@ -116,10 +101,6 @@ contract Snowman is ISnowman, ERC721Enumerable, IERC721Receiver, Ownable, Errors
         DataTypes.Snowman memory snowman = s_attributes[tokenId];
 
         return SnowmanMetadata.renderTokenById(s_accessories, s_accessoriesById, snowman, tokenId);
-    }
-
-    function getFeeCollector() public view returns (address) {
-        return s_feeCollector;
     }
 
     function getAccessories() public view returns (DataTypes.Accessory[] memory) {

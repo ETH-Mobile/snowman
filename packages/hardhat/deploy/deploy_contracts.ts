@@ -24,6 +24,8 @@ const deploySnowman: DeployFunction = async function (
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
+  const FEE_COLLECTOR = deployer;
+
   // Deploy libraries
   const TokenURIGen = await deploy('TokenURIGen', {
     from: deployer
@@ -67,9 +69,9 @@ const deploySnowman: DeployFunction = async function (
     from: deployer
   });
 
-  const hat = await deploy('Hat', {
+  await deploy('Hat', {
     from: deployer,
-    args: [deployer],
+    args: [FEE_COLLECTOR],
     log: true,
     libraries: {
       HatMetadata: hatMetadata.address
@@ -77,9 +79,9 @@ const deploySnowman: DeployFunction = async function (
     autoMine: true
   });
 
-  const scarf = await deploy('Scarf', {
+  await deploy('Scarf', {
     from: deployer,
-    args: [deployer],
+    args: [FEE_COLLECTOR],
     log: true,
     libraries: {
       ScarfMetadata: scarfMetadata.address
@@ -87,9 +89,9 @@ const deploySnowman: DeployFunction = async function (
     autoMine: true
   });
 
-  const belt = await deploy('Belt', {
+  await deploy('Belt', {
     from: deployer,
-    args: [deployer],
+    args: [FEE_COLLECTOR],
     log: true,
     libraries: {
       BeltMetadata: beltMetadata.address
@@ -99,7 +101,6 @@ const deploySnowman: DeployFunction = async function (
 
   await deploy('Snowman', {
     from: deployer,
-    args: [deployer],
     log: true,
     libraries: {
       AttributesGen: attributesGen.address,

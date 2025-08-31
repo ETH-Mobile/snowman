@@ -104,19 +104,6 @@ interface ISnowman is IERC721Enumerable {
 
     /**
      *
-     * @notice Sets a new mint fee collector
-     * @param newFeeCollector Address of new fee collector
-     */
-    function setFeeCollector(address newFeeCollector) external;
-
-    /**
-     *
-     * @notice Retrieves the current mint fee collector
-     */
-    function getFeeCollector() external view returns (address);
-
-    /**
-     *
      * @notice Retrieves all accessories
      */
     function getAccessories() external view returns (DataTypes.Accessory[] memory);

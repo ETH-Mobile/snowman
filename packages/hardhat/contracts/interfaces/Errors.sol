@@ -4,8 +4,6 @@ pragma solidity ^0.8.18;
 
 interface Errors {
     error Snowman__NotMinted();
-    error Snowman__ZeroAddress();
-    error Snowman__InvalidFeeCollector();
     error Snowman__CannotWearAccessory();
     error Snowman__AccessoryAlreadyWorn();
     error Snowman__NotAccessoryOwner();
