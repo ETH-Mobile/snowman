@@ -32,6 +32,7 @@ export default function SeedPhraseInput({
           style={{ flex: 1, paddingRight: 55, paddingVertical: 5 }}
           contentStyle={{ fontSize: FONT_SIZE['lg'], fontFamily: 'Poppins' }}
           outlineStyle={{ borderRadius: 12, borderColor: COLORS.gray }}
+          placeholderTextColor="#a3a3a3"
           activeOutlineColor={COLORS.primary}
           value={value}
           secureTextEntry={!show}

@@ -37,6 +37,7 @@ export function InputBase<
         selectionColor={COLORS.primary}
         cursorColor={COLORS.primary}
         placeholder={placeholder}
+        placeholderTextColor="#a3a3a3"
         onChangeText={handleChange}
       />
       {suffix}

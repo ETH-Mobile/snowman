@@ -53,6 +53,7 @@ export default function EditAccountNameForm({ close }: Props) {
           style={{ width: '60%' }}
           outlineStyle={{ borderRadius: 12, borderColor: COLORS.gray }}
           contentStyle={{ fontFamily: 'Poppins' }}
+          placeholderTextColor="#a3a3a3"
           outlineColor={COLORS.primary}
           cursorColor={COLORS.primary}
           activeOutlineColor={COLORS.primary}
