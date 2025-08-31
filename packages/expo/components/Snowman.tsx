@@ -1,10 +1,11 @@
+import { COLORS } from '@/utils/constants';
 import Device from '@/utils/device';
 import base64 from 'base-64';
 import { Contract, InterfaceAbi, JsonRpcProvider } from 'ethers';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Pressable, View } from 'react-native';
-import { Card, Text } from 'react-native-paper';
+import { Pressable, Text, View } from 'react-native';
+import { Card } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import { useDeployedContractInfo, useNetwork } from '../hooks/eth-mobile';
 
@@ -87,8 +88,11 @@ export default function Snowman({ id }: Props) {
         width={Device.getDeviceWidth() * 0.95}
         height={Device.getDeviceWidth() * 0.95}
       />
-      <View className="absolute top-35 left-7 bg-primaryLight px-8 rounded-4">
-        <Text className="text-bodyLarge font-[Poppins]">{metadata.name}</Text>
+      <View
+        className="absolute top-10 left-4 px-2 rounded-4"
+        style={{ backgroundColor: COLORS.primaryLight }}
+      >
+        <Text className="text-lg font-[Poppins]">{metadata.name}</Text>
       </View>
     </Pressable>
   );

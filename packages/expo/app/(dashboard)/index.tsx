@@ -26,14 +26,6 @@ import {
 import { useToast } from 'react-native-toast-notifications';
 import { parseEther } from 'viem';
 
-function HighlightedText({ children }: { children: string }) {
-  return (
-    <View className="bg-green-100 py-1 rounded-full px-4">
-      <Text className="text-center text-lg font-[Poppins]">{children}</Text>
-    </View>
-  );
-}
-
 export default function Home() {
   const toast = useToast();
   const account = useAccount();
@@ -200,7 +192,7 @@ export default function Home() {
             <CustomButton
               text="Accessories"
               type="outline"
-              onPress={() => router.push('/closet' as never)}
+              onPress={() => router.push('/accessories' as never)}
               style={{ width: '50%' }}
             />
           </View>

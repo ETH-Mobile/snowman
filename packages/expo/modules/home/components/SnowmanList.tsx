@@ -9,8 +9,7 @@ import { COLORS } from '@/utils/constants';
 import Device from '@/utils/device';
 import { Contract, InterfaceAbi, JsonRpcProvider } from 'ethers';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 
@@ -40,7 +39,6 @@ export default function SnowmanList({ balance }: Props) {
 
       const provider = new JsonRpcProvider(network.provider);
 
-      // @ts-ignore
       const snowman = new Contract(
         snowmanContract?.address as string,
         snowmanContract?.abi as InterfaceAbi,
@@ -79,7 +77,11 @@ export default function SnowmanList({ balance }: Props) {
           <Text className="text-center text-lg font-[Poppins]">
             Failed to load your Snowmen
           </Text>
-          <CustomButton text="Retry" onPress={getSnowmen} />
+          <CustomButton
+            text="Retry"
+            onPress={getSnowmen}
+            style={{ width: '50%' }}
+          />
         </View>
       );
     }
