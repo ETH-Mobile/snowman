@@ -1675,12 +1675,14 @@ __metadata:
     "@react-navigation/material-top-tabs": ^7.3.2
     "@react-navigation/native": ^7.1.6
     "@reduxjs/toolkit": ^2.8.2
+    "@types/base-64": ^1
     "@types/fast-text-encoding": ^1
     "@types/jest": ^29.5.12
     "@types/react": ~19.0.10
     "@types/react-test-renderer": ^19.1.0
     abitype: ^1.0.2
     axios: ^1.11.0
+    base-64: ^1.0.0
     ethers: ^6.13.7
     expo: 53.0.16
     expo-application: ~6.1.5
@@ -1717,6 +1719,7 @@ __metadata:
     react-native-qrcode-svg: 6.3.0
     react-native-quick-crypto: 0.7.13
     react-native-reanimated: ~3.17.4
+    react-native-reanimated-carousel: ^4.0.3
     react-native-safe-area-context: 5.4.0
     react-native-screens: ~4.11.1
     react-native-svg: 15.11.2
@@ -3692,6 +3695,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/base-64@npm:^1":
+  version: 1.0.2
+  resolution: "@types/base-64@npm:1.0.2"
+  checksum: bb7593c6de16c88a1bfed73a37c3be2e940921261bb7a160ab6d671f66d976b5426334ae9ce59553a10086db11e52af348813271a8b636e4f88e4cab8f27a3e4
+  languageName: node
+  linkType: hard
+
 "@types/bn.js@npm:^5.1.0":
   version: 5.2.0
   resolution: "@types/bn.js@npm:5.2.0"
@@ -4872,6 +4882,13 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 9706c088a283058a8a99e0bf91b0a2f75497f185980d9ffa8b304de1d9e58ebda7c72c07ebf01dadedaac5b2907b2c6f566f660d62bd336c3468e960403b9d65
+  languageName: node
+  linkType: hard
+
+"base-64@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "base-64@npm:1.0.0"
+  checksum: d10b64a1fc9b2c5a5f39f1ce1e6c9d1c5b249222bbfa3a0604c592d90623caf74419983feadd8a170f27dc0c3389704f72faafa3e645aeb56bfc030c93ff074a
   languageName: node
   linkType: hard
 
@@ -12558,6 +12575,18 @@ __metadata:
     string_decoder: ^1.3.0
     util: ^0.12.5
   checksum: 1413e10ecce27f5b76aeb8306a6c892fb424fd481a2bbc640cd50dde25c0809fbb0b091aa074367580741ca59cf70a4de6e86b4d72a28492c3e2c2cc6d8424f2
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated-carousel@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "react-native-reanimated-carousel@npm:4.0.3"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-native: ">=0.70.3"
+    react-native-gesture-handler: ">=2.9.0"
+    react-native-reanimated: ">=3.0.0"
+  checksum: 32a6077dcea27ff8edc6c5c3001cafd384d2c5a0f56606cfabfe898d12f57b9b994c485ad2241a9a9de2ae39ead278862c6ef4af2a9ea1cbc0311c30e571c025
   languageName: node
   linkType: hard
 
