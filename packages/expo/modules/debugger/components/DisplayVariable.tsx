@@ -45,14 +45,14 @@ export default function DisplayVariable({
   const renderResult = () => {
     if (result === null || result === undefined) return;
 
-    if (typeof result == 'object' && isNaN(result)) {
+    if (typeof result === 'object' && isNaN(result)) {
+      // Custom replacer to handle BigInt serialization
+      const replacer = (_key: string, value: any) =>
+        typeof value === 'bigint' ? value.toString() : value;
       return (
-        <Text className="text-lg font-[Poppins]">{JSON.stringify(result)}</Text>
-      );
-    }
-    if (typeof result == 'object' && isNaN(result)) {
-      return (
-        <Text className="text-lg font-[Poppins]">{JSON.stringify(result)}</Text>
+        <Text className="text-lg font-[Poppins]">
+          {JSON.stringify(result, replacer)}
+        </Text>
       );
     }
     if (isAddress(result.toString())) {
