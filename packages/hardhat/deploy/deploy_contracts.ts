@@ -24,7 +24,7 @@ const deploySnowman: DeployFunction = async function (
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  const FEE_COLLECTOR = deployer;
+  const FEE_COLLECTOR = '0x12adf022b8Fe3ea6cB127027C4e8C16CA2FC1176';
 
   // Deploy libraries
   const TokenURIGen = await deploy('TokenURIGen', {

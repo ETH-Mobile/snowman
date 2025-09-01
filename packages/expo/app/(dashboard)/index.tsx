@@ -178,11 +178,6 @@ export default function Home() {
             />
           )}
 
-          <Text className="text-center mt-4 font-[Poppins] text-base max-w-[70%]">
-            Mint a unique Snowman☃️ for{' '}
-            <Text style={{ color: COLORS.primary }}>FREE</Text>
-          </Text>
-
           <View className="flex-row justify-between w-full gap-2.5 mt-2.5">
             <CustomButton
               text="Mint"

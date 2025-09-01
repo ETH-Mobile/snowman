@@ -14,8 +14,7 @@ import generateTsAbis from './scripts/generateTsAbis';
 
 // If not set, it uses ours Alchemy's default API key.
 // You can get your own at https://dashboard.alchemyapi.io
-const providerApiKey =
-  process.env.ALCHEMY_API_KEY || 'oKxs-03sij-U_N0iOlrSsZFr29-IqbuF';
+const providerApiKey = process.env.ALCHEMY_API_KEY || '_yem4FCVzmN6wbB44mPtF';
 // If not set, it uses the hardhat account 0 private key.
 const deployerPrivateKey =
   process.env.__RUNTIME_DEPLOYER_PRIVATE_KEY ??
