@@ -134,11 +134,13 @@ export default function Accessory({ name }: Props) {
 
   useEffect(() => {
     getAccessories();
-  }, [accessoryContract]);
+  }, [accessoryContract, account]);
 
   const refresh = async () => {
     await _getAccessories();
   };
+
+  console.log(accessories);
 
   return (
     <ScrollView
@@ -176,7 +178,7 @@ export default function Accessory({ name }: Props) {
       ) : (
         <View className="flex-row flex-wrap justify-center gap-2.5 mt-2.5">
           {accessories?.map(accessory => (
-            <Card key={accessory.id} className="bg-white pr-1.5">
+            <Card style={{ backgroundColor: 'white' }} key={accessory.id}>
               <SvgXml
                 xml={accessory.image}
                 width={Device.getDeviceWidth() * 0.4}

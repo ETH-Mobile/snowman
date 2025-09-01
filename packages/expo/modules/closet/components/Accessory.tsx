@@ -272,7 +272,7 @@ export default function Accessory({
               key={accessory.id}
               onPress={() => addToSnowman(Number(accessory.id))}
             >
-              <Card className="bg-white pr-1.5">
+              <Card style={{ backgroundColor: 'white' }}>
                 <SvgXml
                   xml={accessory.image}
                   width={WINDOW_WIDTH * 0.4}
