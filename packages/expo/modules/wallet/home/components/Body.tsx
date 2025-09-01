@@ -84,7 +84,7 @@ function MainBalance() {
           </Text>
         </View>
 
-        <View className="flex-row justify-center items-center my-6">
+        <View className="flex-row justify-center items-center my-6 w-full">
           <Link href="/wallet/transfer/networkToken" push>
             <View className="flex-col items-center gap-y-2">
               <Ionicons
