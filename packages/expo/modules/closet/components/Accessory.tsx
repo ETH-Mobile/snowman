@@ -34,7 +34,7 @@ export default function Accessory({
   const [isLoading, setIsLoading] = useState(false);
   const [isComposing, setIsComposing] = useState(false);
 
-  const { address: connectedAccount } = useAccount();
+  const account = useAccount();
 
   const { data: accessoryContract } = useDeployedContractInfo({
     contractName: name
@@ -68,14 +68,14 @@ export default function Accessory({
   };
 
   const _getAccessories = async () => {
-    if (!accessoryContract) return;
+    if (!accessoryContract || !account) return;
 
     const balance = Number(
       await readContract({
         abi: accessoryContract.abi as InterfaceAbi,
         address: accessoryContract.address,
         functionName: 'balanceOf',
-        args: [connectedAccount]
+        args: [account.address]
       })
     );
 
@@ -86,7 +86,7 @@ export default function Accessory({
           abi: accessoryContract.abi as InterfaceAbi,
           address: accessoryContract.address,
           functionName: 'tokenOfOwnerByIndex',
-          args: [connectedAccount, tokenIndex]
+          args: [account.address, tokenIndex]
         });
 
         const tokenURI = await readContract({
@@ -197,7 +197,7 @@ export default function Accessory({
 
       await writeAccessoryContractAsync({
         functionName: 'safeTransferFrom',
-        args: [connectedAccount, snowman.address, tokenId, encodedSnowmanId]
+        args: [account.address, snowman.address, tokenId, encodedSnowmanId]
       });
 
       toast.show(`Added ${name} to Snowman`, {

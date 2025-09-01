@@ -25,7 +25,7 @@ export default function Accessory({ name }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isMinting, setIsMinting] = useState(false);
 
-  const { address: connectedAccount } = useAccount();
+  const account = useAccount();
 
   const { data: accessoryContract } = useDeployedContractInfo({
     contractName: name
@@ -57,6 +57,11 @@ export default function Accessory({ name }: Props) {
 
       await getAccessories();
     } catch (error) {
+      if (error === null) {
+        setIsMinting(false);
+        return;
+      }
+
       console.error(error);
       toast.show(`Error Minting Accessory`, {
         type: 'danger',
@@ -67,14 +72,14 @@ export default function Accessory({ name }: Props) {
   };
 
   const _getAccessories = async () => {
-    if (!accessoryContract) return;
+    if (!accessoryContract || !account) return;
 
     const balance = Number(
       await readContract({
         abi: accessoryContract.abi as InterfaceAbi,
         address: accessoryContract.address,
         functionName: 'balanceOf',
-        args: [connectedAccount]
+        args: [account.address]
       })
     );
 
@@ -87,7 +92,7 @@ export default function Accessory({ name }: Props) {
           abi: accessoryContract.abi as InterfaceAbi,
           address: accessoryContract.address,
           functionName: 'tokenOfOwnerByIndex',
-          args: [connectedAccount, tokenIndex]
+          args: [account.address, tokenIndex]
         });
 
         const tokenURI = await readContract({

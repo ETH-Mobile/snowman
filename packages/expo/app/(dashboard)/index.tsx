@@ -60,6 +60,10 @@ export default function Home() {
         placement: 'top'
       });
     } catch (error) {
+      if (error === null) {
+        setIsMinting(false);
+        return;
+      }
       toast.show(JSON.stringify(error), { type: 'danger', placement: 'top' });
       console.log('Minting Error: ', error);
     } finally {
@@ -69,7 +73,7 @@ export default function Home() {
 
   const getSnowmanBalance = async () => {
     try {
-      if (isLoadingSnowmanContract) return;
+      if (isLoadingSnowmanContract || !account) return;
       if (!snowmanContract) {
         toast.show('Loading resources', { placement: 'top' });
         return;
