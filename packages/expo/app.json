@@ -10,7 +10,8 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "ETH Mobile needs to access your Camera",
+        "NSCameraUsageDescription": "Snowman needs to access your Camera",
+        "NSLocationWhenInUseUsageDescription": "Snowman needs to access your Location",
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.ethmobile.snowman",
