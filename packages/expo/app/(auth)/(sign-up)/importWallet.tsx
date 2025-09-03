@@ -138,7 +138,10 @@ function ImportWallet() {
 
         // Navigate back to the original screen
         setTimeout(() => {
-          if (pendingWalletCreation.params) {
+          if (
+            pendingWalletCreation.params &&
+            Object.keys(pendingWalletCreation.params).length > 0
+          ) {
             router.dismissTo({
               pathname: pendingWalletCreation.screen,
               params: pendingWalletCreation.params
@@ -150,7 +153,7 @@ function ImportWallet() {
       } else {
         // Default navigation to dashboard
         setTimeout(() => {
-          router.replace('/(dashboard)');
+          router.replace('/home');
         }, 200);
       }
     } catch (error) {

@@ -9,7 +9,7 @@ import { initWallet } from '@/store/reducers/Wallet';
 import { COLORS } from '@/utils/constants';
 import { Encryptor } from '@/utils/eth-mobile/encryptor';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -29,7 +29,6 @@ interface Wallet {
 }
 
 export default function CreateWallet() {
-  const router = useRouter();
   const dispatch = useDispatch();
   const { password } = useLocalSearchParams<{ password: string }>();
   const toast = useToast();
@@ -115,7 +114,10 @@ export default function CreateWallet() {
 
         // Navigate back to the original screen
         setTimeout(() => {
-          if (pendingWalletCreation.params) {
+          if (
+            pendingWalletCreation.params &&
+            Object.keys(pendingWalletCreation.params).length > 0
+          ) {
             router.dismissTo({
               pathname: pendingWalletCreation.screen,
               params: pendingWalletCreation.params
@@ -127,7 +129,7 @@ export default function CreateWallet() {
       } else {
         // Default navigation to dashboard
         setTimeout(() => {
-          router.replace('/(dashboard)');
+          router.replace('/home');
         }, 200);
       }
     } catch (error) {
