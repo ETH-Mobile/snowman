@@ -169,14 +169,17 @@ export default function ERC20TokenTransfer() {
     });
   };
 
-  const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    navigation.goBack();
-
-    return true;
-  });
-
   useEffect(() => {
     if (!isFocused) return;
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        navigation.goBack();
+        return true;
+      }
+    );
+
     const provider = new JsonRpcProvider(network.provider);
 
     provider.off('block');

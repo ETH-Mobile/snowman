@@ -146,14 +146,18 @@ export default function NetworkTokenTransfer() {
     });
   };
 
-  const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-    navigation.goBack();
-
-    return true;
-  });
-
   useEffect(() => {
     if (!isFocused) return;
+
+    // Move BackHandler creation inside useEffect
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        navigation.goBack();
+        return true;
+      }
+    );
+
     const provider = new JsonRpcProvider(network.provider);
 
     provider.off('block');
@@ -166,7 +170,7 @@ export default function NetworkTokenTransfer() {
 
     return () => {
       provider.off('block');
-      backHandler.remove();
+      backHandler.remove(); // Now this will work correctly
     };
   }, []);
 
