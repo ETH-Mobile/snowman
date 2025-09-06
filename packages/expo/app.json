@@ -11,6 +11,7 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Snowman needs to access your Camera",
+        "NSFaceIDUsageDescription": "Snowman needs to access your Face ID",
         "NSLocationWhenInUseUsageDescription": "Snowman needs to access your Location",
         "ITSAppUsesNonExemptEncryption": false
       },
