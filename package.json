@@ -15,6 +15,7 @@
     "account:reveal-pk": "yarn workspace @ethmobile/hardhat account:reveal-pk",
     "android": "yarn workspace @ethmobile/expo android",
     "build:android:dev": "yarn workspace @ethmobile/expo build:android:dev",
+    "build:android:preview": "yarn workspace @ethmobile/expo build:android:preview",
     "build:android:prod": "yarn workspace @ethmobile/expo build:android:prod",
     "build:configure": "yarn workspace @ethmobile/expo build:configure",
     "build:ios:dev": "yarn workspace @ethmobile/expo build:ios:dev",
