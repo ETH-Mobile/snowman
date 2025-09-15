@@ -42,7 +42,11 @@ export default function PasswordInput({
           placeholderTextColor="#a3a3a3"
           activeOutlineColor={COLORS.primary}
           style={{ flex: 1, paddingRight: 55 }}
-          contentStyle={{ fontSize: FONT_SIZE.lg, fontFamily: 'Poppins' }}
+          contentStyle={{
+            fontSize: FONT_SIZE.lg,
+            fontFamily: 'Poppins',
+            color: 'black'
+          }}
           left={<TextInput.Icon icon="lock" color="#a3a3a3" />}
           secureTextEntry={!show}
           placeholder="Password"
