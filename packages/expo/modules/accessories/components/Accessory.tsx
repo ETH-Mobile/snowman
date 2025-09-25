@@ -51,8 +51,7 @@ export default function Accessory({ name }: Props) {
       });
 
       toast.show(`Minted One Accessory`, {
-        type: 'success',
-        placement: 'top'
+        type: 'success'
       });
 
       await getAccessories();
@@ -139,8 +138,6 @@ export default function Accessory({ name }: Props) {
   const refresh = async () => {
     await _getAccessories();
   };
-
-  console.log(accessories);
 
   return (
     <ScrollView

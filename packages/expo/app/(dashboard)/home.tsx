@@ -55,10 +55,6 @@ export default function Home() {
       });
 
       setBalance(balance + 1);
-      toast.show('Minted One(1) Snowman☃️', {
-        type: 'success',
-        placement: 'top'
-      });
     } catch (error) {
       if (error === null) {
         setIsMinting(false);

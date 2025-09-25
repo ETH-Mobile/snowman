@@ -1,8 +1,8 @@
 import BackButton from '@/components/buttons/BackButton';
 import { Blockie } from '@/components/eth-mobile';
 import { Network } from '@/ethmobile.config';
-import { useNetwork } from '@/hooks/eth-mobile';
-// import { Account } from '@/store/reducers/Accounts';
+import { useAccount, useNetwork } from '@/hooks/eth-mobile';
+import { Account } from '@/store/reducers/Accounts';
 import { FONT_SIZE } from '@/utils/constants';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -27,12 +27,7 @@ export default function HomeHeader() {
   const { openModal } = useModal();
 
   const connectedNetwork: Network = useNetwork();
-
-  //   const connectedAccount: Account = useAccount();
-  const connectedAccount = {
-    name: 'Account 1',
-    address: '0x2656D1344a31fCCD050dFac53FA1406597B6f12e'
-  };
+  const connectedAccount: Account = useAccount();
 
   const toast = useToast();
 
